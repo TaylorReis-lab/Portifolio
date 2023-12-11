@@ -1,0 +1,65 @@
+:root {
+    --primary-color: #33383C;
+    --secondary-color: #33383C;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(90deg, #33383C 32%, #ffffff 10%);
+    margin: auto;
+}
+
+/*  NAVBAR  */
+
+header {
+    padding: 1.7rem 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: transparent;
+    align-content: center;
+}
+
+.logo a {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+nav {
+    z-index: 1;
+}
+
+nav a {
+    color: #33383C;
+    text-decoration: none;
+    font-size: .97rem;
+    font-weight: 600;
+    padding: 0.4rem 1.3rem;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #ffffff;
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 20px var(--secondary-color);
+    border-color: var(--secondary-color);
+    transition: all .3s ease-in-out;
+}
+
+#click {
+    display: none;
+}
+
+.menu {
+    display: none;
+}
+
+/*NAVBAR*/
