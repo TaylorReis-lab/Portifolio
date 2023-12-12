@@ -11,7 +11,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(90deg, #33383C 32%, #ffffff 10%);
+    background: linear-gradient(90deg, #000000 32%, #ffffff 10%);
     margin: auto;
 
 }
@@ -38,7 +38,7 @@ nav {
 }
 
 nav a {
-    color: #33383C;
+    color: #000000;
     text-decoration: none;
     font-size: .97rem;
     font-weight: 600;
@@ -79,7 +79,7 @@ section {
 .main h1 {
     font-size: 2.5rem;
     font-weight: 600;
-    color: #33383C;
+    color: #000000;
 }
 
 .Information {
@@ -132,7 +132,7 @@ section {
     width: 25em;
     height: 25em;
     border-radius: 50%;
-    background: #33383C;
+    background: #000000;
     display: grid;
     place-items: center;
 }
