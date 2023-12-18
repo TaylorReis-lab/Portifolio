@@ -2,6 +2,8 @@ const dowloadCurriculum = document.querySelector(".cv-btn")
 const buttonAbout = document.querySelector(".button-about")
 const buttonSkills = document.querySelector(".button-skills")
 const buttonPortfo = document.querySelector(".button-portfolio")
+const buttonContact = document.querySelector(".button-contact")
+const title = document.querySelector(".title")
 const list = document.querySelector(".social")
 let myLi = ""
 
@@ -32,7 +34,6 @@ function mostSkill() {
 }
 
 function mostPort() {
-    dowloadCurriculum.style.display = "none"
     list.innerHTML = `
     <ul class="links" >
         <li><a href="https://taylorreis-lab.github.io/Nikel/"><i class="bi bi-globe2"></i></a>Projeto Nikel Gerenciador de Gastos</li>
@@ -44,8 +45,20 @@ function mostPort() {
     `
 }
 
+function mostContact() {
+    title.innerHTML = `Formas de contato abaixo`
+    list.innerHTML = `
+    <div class="social">
+                    <a href="https://github.com/TaylorReis-lab"><i class="bi bi-github"></i></a>
+                    <!-- <a href="https://www.youtube.com/taylor__reis"><i class="bi bi-youtube"></i></a> -->
+                    <a href="https://www.instagram.com/taylor__reis/"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/taylor--reis/"><i class="bi bi-linkedin"></i></a>
+                </div>
+    `
+}
 
 
+buttonContact.addEventListener("click", mostContact)
 buttonPortfo.addEventListener("click", mostPort)
 buttonSkills.addEventListener("click", mostSkill)
 buttonAbout.addEventListener("click", mostAbout)
