@@ -134,11 +134,13 @@ li a:hover {
     animation: leftSideAni 1s ease forwards;
     animation-delay: 1s;
 }
-.main p {
+.main ul {
     line-height: 1.7;
     font-size: 1.15rem;
     opacity: 0;
     animation: topSideAni 1.5s ease forwards;
+    display: inline-block;
+    margin: 0 0 0 15px;
 }
 .social {
     display: flex;
@@ -174,7 +176,6 @@ li a:hover {
 
 .images {
     margin-left: auto;
-    width: 350px;
     height: 350px;
     text-align: center;
     overflow: hidden;

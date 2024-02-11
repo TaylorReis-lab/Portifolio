@@ -138,6 +138,8 @@ li a:hover {
     line-height: 1.7;
     font-size: 1.15rem;
     opacity: 0;
+    overflow: scroll;
+    height: 300px;
     animation: topSideAni 1.5s ease forwards;
 }
 .social {
