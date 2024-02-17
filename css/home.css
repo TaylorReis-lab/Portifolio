@@ -134,11 +134,17 @@ li a:hover {
     animation: leftSideAni 1s ease forwards;
     animation-delay: 1s;
 }
-.main p {
+.main p, #text {
     line-height: 1.7;
     font-size: 1.15rem;
     opacity: 0;
     animation: topSideAni 1.5s ease forwards;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.aparecer {
+    opacity: 1;
 }
 .social {
     display: flex;
