@@ -228,6 +228,7 @@ li a:hover {
 
 .container-card {
     margin-left: 8%;
+    margin-bottom: 2%;
 }
 
 .cards {
@@ -252,6 +253,7 @@ li a:hover {
 
 .card-text {
     padding: 1px 10px;
+    text-align: center;
 }
 
 .container-port {
