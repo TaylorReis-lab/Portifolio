@@ -1,392 +1,480 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+
+<html class="light" lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./css/home.css" />
-    <link rel="shortcut icon" href="" type="image/x-icon">
-    <title>Portfolio</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Dev. Portfolio - Taylor Reis</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.svg" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Language toggle styles */
+        .lang-toggle {
+            width: 56px;
+            height: 32px;
+            border-radius: 9999px;
+            padding: 3px;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .lang-toggle .slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 26px;
+            height: 26px;
+            background: #fff;
+            border-radius: 9999px;
+            box-shadow: 0 1px 4px rgba(16, 24, 40, 0.08);
+            transition: transform .22s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .lang-toggle[data-lang="pt"] .slider {
+            transform: translateX(24px);
+        }
+
+        .lang-toggle .lang-label {
+            position: absolute;
+            font-weight: 700;
+            font-size: 11px;
+            pointer-events: none;
+            color: #135bec;
+        }
+    </style>
 </head>
 
-<body>
-    <section>
-        <header class="container">
-            <div class="page-header">
-                <div class="logo">
-                    <a href="#">Portfolio</a>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-white transition-colors duration-300">
+    <!-- Top Navigation Bar -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <div class="bg-primary p-1.5 rounded-lg text-white">
+                    <span class="material-symbols-outlined block">code</span>
                 </div>
-                <input type="checkbox" id="click" />
-
-                <label for="click" class="mainicon">
-                    <div class="menu">
-                        <i class="bx bx-menu"></i>
-                    </div>
-                </label>
-                <ul>
-                    <li><a href="#text-home" class="active" style="--navAni: 1">Home</a></li>
-                    <li>
-                        <a href="#text-about" style="--navAni: 2">About</a>
-                    </li>
-                    <li><a href="#skills" style="--navAni: 3">Tecnologias</a></li>
-                    <li>
-                        <a href="#projects" style="--navAni: 4">Projects</a>
-                    </li>
-                    <li><a href="#contact" style="--navAni: 5">Contact</a></li>
-                </ul>
-                <label class="mode">
-                    <input type="checkbox" id="darkModeToggle" />
-                    <i class="bx bxs-moon"></i>
-                </label>
-                <button type="button"></button>
+                <h2 class="text-[#0d121b] dark:text-white text-lg font-bold leading-tight tracking-tight">Taylor.dev
+                </h2>
             </div>
-        </header>
+            <nav class="hidden md:flex items-center gap-10">
+                <a data-i18n="nav.about" class="text-sm font-medium hover:text-primary transition-colors"
+                    href="#">About</a>
+                <a data-i18n="nav.projects" class="text-sm font-medium hover:text-primary transition-colors"
+                    href="#projects">Projects</a>
+                <a data-i18n="nav.contact" class="text-sm font-medium hover:text-primary transition-colors"
+                    href="#contact">Contact</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" aria-label="Alternar modo" title="Alternar tema (claro/escuro)"
+                    class="p-2 rounded-lg bg-[#e7ebf3] dark:bg-gray-800 text-[#0d121b] dark:text-white hover:bg-primary/10 transition-colors">
+                    <span id="theme-icon" class="material-symbols-outlined text-[20px] block"
+                        aria-hidden="true">dark_mode</span>
+                </button>
 
-        <div class="container" id="text-home">
-            <div class="main">
-                <div class="detail">
-                    <h3>Hi, I'm</h3>
-                    <h1><span style="color: #52489c">Taylor</span> Reis</h1>
-                    <h4>Desenvolvedor Full Stack - Back-End</h4>
-                    <div id="home">
-                        <p>Olá! Sou Taylor Reis, desenvolvedor especializado em back end. Meu objetivo é criar soluções
-                            digitais robustas e escaláveis que impulsionem o sucesso dos projetos. Estou animado para
-                            compartilhar meu trabalho e minha paixão pelo desenvolvimento web com você. Vamos explorar
-                            juntos!</p>
+                <div class="relative">
+                    <button id="lang-toggle" aria-label="Alternar idioma" title="Alternar idioma (EN/PT)"
+                        class="lang-toggle p-1 bg-[#e7ebf3] dark:bg-gray-800 rounded-full focus:outline-none transition-colors"
+                        data-lang="en">
+                        <span class="slider" aria-hidden="true"></span>
+                        <span id="lang-label" class="lang-label">EN</span>
+                    </button>
+                </div>
+
+                <button id="btn-chat"
+                    class="hidden sm:flex bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-primary/90 transition-all shadow-sm">
+                    <span data-i18n="btn.chat">Let's Chat</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-[1200px] mx-auto px-6">
+        <!-- Hero Section -->
+        <section class="py-16 md:py-24">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-8">
+                    <div class="flex flex-col gap-4">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold w-fit">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
+                            <span data-i18n="badge.available">AVAILABLE FOR HIRE</span>
+                        </div>
+                        <h1 data-i18n="hero.title" data-i18n-html="true"
+                            class="text-[#0d121b] dark:text-white text-5xl md:text-7xl font-black leading-tight tracking-tight">
+                            Hi, I'm Taylor, <span class="text-primary">Full Stack</span> Developer
+                        </h1>
+                        <p data-i18n="hero.desc"
+                            class="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-[500px] leading-relaxed">
+                            Building scalable web applications with modern technologies. Focused on high performance and
+                            exceptional user experiences.
+                        </p>
                     </div>
-                    <div class="social">
-                        <a href="https://www.linkedin.com/in/taylor--reis/" target="_blank" style="--socialAni: 1"><i
-                                class="bx bxl-linkedin"></i></a>
-                        <a href="https://www.instagram.com/taylor__reis/" target="_blank" style="--socialAni: 2"><i
-                                class="bx bxl-instagram"></i></a>
-                        <a href="https://github.com/TaylorReis-lab" target="_blank" style="--socialAni: 3"><i
-                                class="bx bxl-github"></i></a>
-                        <a id="cv-update"
-                            href="https://drive.google.com/file/d/1IXOXDoZkdhbVVvgt0yKzSZfM50vH15XM/view?usp=drive_link"
-                            target="_blank">Curriculo</a>
+                    <div class="flex flex-wrap gap-4">
+                        <button id="btn-work"
+                            class="bg-primary text-white px-8 py-4 rounded-xl text-base font-bold hover:shadow-lg hover:translate-y-[-2px] transition-all flex items-center gap-2">
+                            <span data-i18n="btn.view">View My Work</span>
+                            <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
+                        </button>
+                        <button id="btn-cv"
+                            class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-[#0d121b] dark:text-white px-8 py-4 rounded-xl text-base font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
+                            <span data-i18n="btn.cv">Download CV</span>
+                        </button>
                     </div>
                 </div>
-                <div class="img-h">
-                    <img src="./assets/photo-perfil.png" alt="" class="img-w" />
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-primary/5 rounded-full blur-3xl"></div>
+                    <div
+                        class="relative aspect-square w-full max-w-[450px] mx-auto bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
+                        <img alt="Professional portrait of Alex" class="w-full h-full object-cover"
+                            data-alt="Modern professional headshot of a developer" src="./assets/73500858.png" />
+                    </div>
+                    <div
+                        class="absolute -bottom-6 -left-6 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-gray-100 dark:border-gray-700">
+                        <div class="bg-green-100 dark:bg-green-900/30 p-2 rounded-full">
+                            <span class="material-symbols-outlined text-green-600 dark:text-green-400">verified</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold">3+ Years Exp.</p>
+                            <p class="text-xs text-gray-500">Industry Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 border-t border-gray-200 dark:border-gray-800" id="about">
+            <div class="grid md:grid-cols-12 gap-12 md:gap-24">
+                <div class="md:col-span-4">
+                    <div class="sticky top-24">
+                        <h2 data-i18n="about.heading"
+                            class="text-primary text-sm font-bold uppercase tracking-widest mb-4">About Me</h2>
+                        <h3 data-i18n="about.tagline" data-i18n-html="true"
+                            class="text-[#0d121b] dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight">
+                            Passion meets <br />precision.
+                        </h3>
+                    </div>
+                </div>
+                <div class="md:col-span-8 flex flex-col gap-10">
+                    <div class="flex flex-col gap-6">
+                        <p data-i18n="about.p1" class="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
+                            I am a full-stack developer with over five years of experience in creating digital products
+                            that balance technical excellence with user-centric design. My approach is rooted in the
+                            belief that great software should be as beautiful on the inside as it is on the outside.
+                        </p>
+                        <p data-i18n="about.p2" data-i18n-html="true"
+                            class="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
+                            I specialize in <span class="text-[#0d121b] dark:text-white font-bold">building robust
+                                backend systems</span> that scale effortlessly, while simultaneously crafting <span
+                                class="text-[#0d121b] dark:text-white font-bold">intuitive frontend experiences</span>
+                            that engage and delight users. Whether it's architecting complex APIs or fine-tuning
+                            micro-interactions, I bring a meticulous eye for detail to every stage of the development
+                            lifecycle.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+                        <div
+                            class="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm">
+                            <p class="text-primary text-4xl font-black mb-1">03+</p>
+                            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Years
+                                Experience</p>
+                        </div>
+                        <div
+                            class="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm">
+                            <p class="text-primary text-4xl font-black mb-1">40+</p>
+                            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Projects Completed</p>
+                        </div>
+                        <div
+                            class="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm">
+                            <p class="text-primary text-4xl font-black mb-1">12+</p>
+                            <p class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Happy
+                                Clients</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Tech Stack Section -->
+        <section class="py-12 border-y border-gray-200 dark:border-gray-800">
+            <h3 data-i18n="tech.title"
+                class="text-center text-sm font-bold text-gray-400 uppercase tracking-[0.2em] mb-10">My Tech Stack</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">auto_awesome</span>
+                    <span class="font-bold text-sm">React</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">javascript</span>
+                    <span class="font-bold text-sm">TypeScript</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">dns</span>
+                    <span class="font-bold text-sm">Node.js</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">database</span>
+                    <span class="font-bold text-sm">PostgreSQL</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">cloud</span>
+                    <span class="font-bold text-sm">AWS</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">terminal</span>
+                    <span class="font-bold text-sm">Python</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">code</span>
+                    <span class="font-bold text-sm" data-i18n="tech.php">PHP</span>
+                </div>
+                <div
+                    class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 hover:border-primary transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-3xl text-gray-400 group-hover:text-primary transition-colors">developer_mode</span>
+                    <span class="font-bold text-sm" data-i18n="tech.csharp">C#</span>
+                </div>
+            </div>
+        </section>
+        <!-- Featured Projects -->
+        <section class="py-24" id="projects">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
+                <div class="flex flex-col gap-3">
+                    <h2 data-i18n="projects.title"
+                        class="text-[#0d121b] dark:text-white text-4xl font-black tracking-tight">Featured Projects</h2>
+                    <p data-i18n="projects.desc" class="text-gray-500 dark:text-gray-400 max-w-md">Selected work from my
+                        recent portfolio. Every
+                        project is built from scratch with clean, maintainable code.</p>
+                </div>
+                <button id="btn-see-all"
+                    class="text-primary font-bold flex items-center gap-2 group hover:underline underline-offset-4">
+                    <span data-i18n="projects.seeAll">See All Projects</span>
+                    <span
+                        class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all">
+                    <div class="relative h-60 overflow-hidden">
+                        <img alt="E-commerce project"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Sleek modern e-commerce dashboard interface"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBwiC3JfB0rP8zIMqeiDDWcRkTZEym1VTizOWlpKOcvxKSz2vY7VgIzLGLlyu11yoc-MKf2Wtph36NfetKbwGUTYxnSdivLXsLMWRbothwx19ffbnJ_9oapik9wf1s-92muPiEmV3gpy3tpEBRScf-7R5uFvpmnB1-hcb5rNY_LyTTey73x2pkmJxFY7zOVqGeDkL1mtjohkCHgl8_BDIYPrTnif4WE2rHhvnVL8TdpWLkG3bWMmHNe7wkqRp-rHHrFHIFJKSstP5u" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <span
+                                class="material-symbols-outlined bg-white text-black p-3 rounded-full cursor-pointer hover:bg-primary hover:text-white transition-colors">link</span>
+                            <span
+                                class="material-symbols-outlined bg-white text-black p-3 rounded-full cursor-pointer hover:bg-primary hover:text-white transition-colors">code</span>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col gap-4">
+                        <div class="flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">React</span>
+                            <span
+                                class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Stripe</span>
+                        </div>
+                        <h3 data-i18n="project.1.title"
+                            class="text-xl font-bold group-hover:text-primary transition-colors">Veloce Commerce</h3>
+                        <p data-i18n="project.1.desc" class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            A high-performance e-commerce engine with real-time inventory and Stripe integration.
+                        </p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all">
+                    <div class="relative h-60 overflow-hidden">
+                        <img alt="SaaS Analytics"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Complex data visualization dashboard for SaaS"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFZE9tM2OR4DB3a4guDI6Cc2TEjCl0ViUo-9XXkM-jwUlIZc-OVTFK3D9Djq9KbVKPSgQ38Dovkvug97ScRp5cYkskka48YRlxgcrzsw8XSvA0sXuwMpCQxt8AFy888suyoVQfkF2xq_N2C33vM0VLlYWRDvI844Gw2u4SZ1O1grbe21igxQcOE0HH3BXgOEKlyCilJKWxhirMPmp313_k01PbKsE7vgUFLQDrH8GQW-xnrzmHhK8SKT_-XNTbR0m30A8YgiojueIh" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <span
+                                class="material-symbols-outlined bg-white text-black p-3 rounded-full cursor-pointer hover:bg-primary hover:text-white transition-colors">link</span>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col gap-4">
+                        <div class="flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">TypeScript</span>
+                            <span
+                                class="px-2 py-1 bg-purple-100 text-purple-700 text-[10px] font-bold rounded uppercase">Next.js</span>
+                        </div>
+                        <h3 data-i18n="project.2.title"
+                            class="text-xl font-bold group-hover:text-primary transition-colors">Insight Analytics</h3>
+                        <p data-i18n="project.2.desc" class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            Comprehensive data visualization platform for monitoring SaaS performance metrics in
+                            real-time.
+                        </p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div
+                    class="group flex flex-col bg-white dark:bg-gray-800 rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all">
+                    <div class="relative h-60 overflow-hidden">
+                        <img alt="Task Manager"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            data-alt="Abstract gradient representation of a productivity app"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVSk5kt7iTmykkKQ-Vd9U1152q_a-ArPFr_SaxdstTaqunv_FJ2CkrF6DGNkZR-hG6UGh63lt3a5N7RAt0eWfmU-wc2LuQeGe5aETRoeVAv8M2hpjMleN9Wc6uiGZO0QpRaTMmkQAFTpYe1o9rBB2ew7dP6ha60cQpImvx7hpCdzH5_0zSrZUsLRwZBkI8HkK12F0Vn6QligGDC_DnwdmU6cIbDwh9E_53iFw4ZIwCy6PmVmCDRFTAqh7p45kRLfZvfoGKceFuAPOv" />
+                        <div
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                            <span
+                                class="material-symbols-outlined bg-white text-black p-3 rounded-full cursor-pointer hover:bg-primary hover:text-white transition-colors">link</span>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col gap-4">
+                        <div class="flex gap-2">
+                            <span
+                                class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">Node.js</span>
+                            <span
+                                class="px-2 py-1 bg-orange-100 text-orange-700 text-[10px] font-bold rounded uppercase">PostgreSQL</span>
+                        </div>
+                        <h3 data-i18n="project.3.title"
+                            class="text-xl font-bold group-hover:text-primary transition-colors">Workflow Pro</h3>
+                        <p data-i18n="project.3.desc" class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            Collaborative task management application with nested projects and custom workflows.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Projects Modal (paginado) -->
+        <div id="projects-modal" class="fixed inset-0 z-[9999] hidden flex items-center justify-center p-6">
+            <div id="projects-modal-overlay" class="absolute inset-0 bg-black/40 z-10"></div>
+            <div class="relative z-20 w-full max-w-[1100px] modal-content bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-300 opacity-0 translate-y-6 max-h-[calc(100vh-6rem)] overflow-auto"
+                role="dialog" aria-modal="true" aria-labelledby="projects-modal-title" aria-hidden="true">
+                <div class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-700">
+                    <h3 id="projects-modal-title" class="text-xl font-bold" data-i18n="projects.modalTitle">All Projects
+                    </h3>
+                    <div class="flex items-center gap-2">
+                        <button id="projects-modal-prev" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+                            aria-label="Previous page"><span
+                                class="material-symbols-outlined">arrow_back</span></button>
+                        <button id="projects-modal-next" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
+                            aria-label="Next page"><span class="material-symbols-outlined">arrow_forward</span></button>
+                        <button id="projects-modal-close" aria-label="Close"
+                            class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"><span
+                                class="material-symbols-outlined">close</span></button>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div id="projects-modal-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                    <div class="mt-6 flex items-center justify-center gap-3">
+                        <button id="projects-modal-page-prev"
+                            class="px-3 py-1 rounded bg-gray-100 dark:bg-gray-700">Prev</button>
+                        <div id="projects-modal-page-indicator" class="text-sm text-gray-500 dark:text-gray-400">Page 1
+                            / 1</div>
+                        <button id="projects-modal-page-next"
+                            class="px-3 py-1 rounded bg-gray-100 dark:bg-gray-700">Next</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container" id="text-about">
-            <div class="main">
-                <div class="img-a">
-                    <img src="./assets/photo-perfil (2).png" alt="" class="img-w" />
-                </div>
-                <div class="detail">
-                    <h1><span style="color: #52489c">About</h1>
-                    <h3> Bem-vindo ao meu portfólio!</h3>
-                    <div id="about"></div>
-                </div>
-            </div>
-        </div>
-        <div class="container-card" id="skills">
-            <h1><span style="color: #52489c; margin-left: 35%; font-size: 40px;">Habilidades Tecnicas</h1>
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg"
-                    alt="img-docker-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Docker</h1>
-                    <p class="card-text">Plataforma de contêineres para desenvolvimento, implantação e execução de
-                        aplicativos</p>
-                </div>
-            </div>
 
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/mongodb/mongodb-ar21.svg"
-                    alt="img-MongoDB-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">MongoDB</h1>
-                    <p class="card-text">Banco de dados NoSQL orientado a documentos, projetado para escalabilidade
-                        e alta disponibilidade, comumente utilizado em aplicações web modernas.</p>
+        <!-- CTA / Footer -->
+        <section class="py-24" id="contact">
+            <div class="bg-primary rounded-[3rem] p-12 md:p-24 text-center text-white relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2">
                 </div>
-            </div>
-
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top"
-                    src="https://upload.vectorlogo.zone/logos/djangoproject/images/3a96fc19-0d1b-43de-86d6-5e506122ea1d.svg"
-                    alt="img-MongoDB-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Django</h1>
-                    <p class="card-text"> Framework web Python para desenvolvimento rápido e seguro de aplicativos.</p>
+                <div
+                    class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2">
                 </div>
-            </div>
-
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top"
-                    src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"
-                    alt="img-MongoDB-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Flask</h1>
-                    <p class="card-text">Microframework web Python para construir aplicativos web pequenos e simples.</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/mysql/mysql-official.svg"
-                    alt="img-mysql-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">MySQL</h1>
-                    <p class="card-text">Sistema de gerenciamento de banco de dados relacional amplamente utilizado
-                        para armazenar e gerenciar dados.</p>
-                </div>
-            </div>
-            <div class="cards" style="width: 240px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg"
-                    alt="img-node-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">NodeJS</h1>
-                    <p class="card-text">Plataforma de desenvolvimento de código aberto para executar JavaScript no
-                        lado do servidor.</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 240px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg"
-                    alt="img-node-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">React</h1>
-                    <p class="card-text">Plataforma de desenvolvimento de código aberto para criar interfaces de usuário
-                        interativas e dinâmicas utilizando React.js, uma biblioteca JavaScript de código aberto para
-                        construir interfaces de usuário.</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 240px;">
-                <img class="card-img-top"
-                    src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg"
-                    alt="img-node-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">JavaScript</h1>
-                    <p class="card-text"> Essencial para desenvolvimento web, é usado tanto no front-end quanto no
-                        back-end com o Node.js. Oferece capacidade de criar interfaces de usuário dinâmicas e
-                        interativas</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 240px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/expressjs/expressjs-ar21.svg"
-                    alt="img-node-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">ExpressJs</h1>
-                    <p class="card-text"> Um framework web para Node.js que simplifica o desenvolvimento de aplicativos
-                        web e APIs. Oferece uma variedade de recursos para roteamento, middleware e integração de banco
-                        de dados. É uma escolha popular para construir aplicativos web escaláveis e eficientes</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/postgresql/postgresql-vertical.svg"
-                    alt="img-postgresql-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">PostgreSQL</h1>
-                    <p class="card-text">Sistema de gerenciamento de banco de dados relacional de objeto-relacional
-                        de código aberto</p>
-                </div>
-            </div>
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg"
-                    alt="img-git-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Git/GitHub</h1>
-                    <p class="card-text">Sistema de controle de versão distribuído para rastrear alterações em
-                        arquivos de código-fonte durante o desenvolvimento de software</p>
-                </div>
-            </div>
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg"
-                    alt="img-typescript-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">TypeScript</h1>
-                    <p class="card-text">Superset de JavaScript que adiciona tipagem estática opcional e outros
-                        recursos para facilitar o desenvolvimento de aplicativos JavaScript em larga escala</p>
-                </div>
-            </div>
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/python/python-vertical.svg"
-                    alt="img-Python-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Python</h1>
-                    <p class="card-text">Linguagem de programação de alto nível, interpretada e de uso geral</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg"
-                    alt="img-HTML-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Html5</h1>
-                    <p class="card-text">Linguagem de marcação utilizada para estruturar e apresentar conteúdo na
-                        web.</p>
-                </div>
-            </div>
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/w3_css/w3_css-official.svg"
-                    alt="img-CSS-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">CSS3</h1>
-                    <p class="card-text">Linguagem de estilo utilizada para estilizar a apresentação de documentos
-                        HTML.</p>
-                </div>
-            </div>
-
-            <div class="cards" style="width: 250px;">
-                <img class="card-img-top" src="https://www.vectorlogo.zone/logos/angular/angular-icon.svg"
-                    alt="img-CSS-icon">
-                <div class="card-body">
-                    <h1 class="card-h1">Angular</h1>
-                    <p class="card-text">Framework JavaScript de código aberto para desenvolvimento de aplicativos web de uma única página (SPA).</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="container-card-port" id="projects">
-            <h1><span style="color: #52489c; margin-left: 48%; font-size: 40px;">Projects</h1>
-            <div class="container-port">
-                <button class="prevButton" id="prevButton">Anterior</button>
-
-                <div class="card">
-                    <img src="https://img.freepik.com/vetores-gratis/em-breve-banner-com-luzes-de-foco_1017-33739.jpg"
-                        alt="img-project">
-                    <h2>Burguer Shpping</h2>
-                    <p>Site para humburgueria comercial, com controle de pedido e clientes, site totalmente funcional e
-                        ja preparado para colocar ao ar e utlizar no seu dia a dia,
-                        Tecnologias: React, MongoDB, PostgreSQL.
+                <div class="relative z-10 flex flex-col gap-8 max-w-2xl mx-auto">
+                    <h2 data-i18n="cta.title" class="text-4xl md:text-6xl font-black">Interested in working together?
+                    </h2>
+                    <p data-i18n="cta.desc" class="text-white/80 text-lg md:text-xl">
+                        I'm currently available for freelance projects or full-time roles. Let's build something amazing
+                        together.
                     </p>
-                    <button><a href="" target="_blank" style="text-decoration: none; color: #ffff;">Visitar o
-                            Project</a></button>
-                    <button type="button"><a href="https://github.com/TaylorReis-lab/banco-de-dados" target="_blank" style="text-decoration: none; color: #ffff;">Banco
-                            de dados</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/python.jpg" alt="img-project">
-                    <h2>Bot Blaze Double</h2>
-                    <p>Bot desenvolvido com Python, integrado a api do telegram, e com automação para realizar jogadas
-                        automaticas</p>
-                    <button type="button"><a href="https://github.com/TaylorReis-lab/Blaze-Double" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/creating-user.png" alt="img-project">
-                    <h2>Creating-user</h2>
-                    <p>Aplicação simples para registro de pessoas, com foco no React.Js e NodeJS, interface desenvolvida
-                        completamente pelo react, e banco de dados desenvolvido com Node.JS.</p>
-                    <button><a href="https://github.com/TaylorReis-lab/App-Creating-Users" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                    <button><a href="https://github.com/TaylorReis-lab/Base-banco-node-app-creating-user"
-                            target="_blank" style="text-decoration: none; color: #ffff;">Api-NodeJS</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/Version-PC.png" alt="img-project">
-                    <h2>Convert Coins</h2>
-                    <p>Aplicação simples para registro de pessoas, com foco no HTML, CSS3, JavaScript, com o objetivo de
-                        converter moedas com api integrada para sempre ter valores atualizados.</p>
-                    <button><a href="https://taylorreis-lab.github.io/Convert-Coins/" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/screen-home.png" alt="img-project">
-                    <h2>Order Code Burguer</h2>
-                    <p>Aplicação criada utilizando React.JS e Node.JS, com o objetivo de criar pedidos.</p>
-                    <button><a href="https://github.com/TaylorReis-lab/Order-Club-Burguer" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/random-daw.png" alt="img-project">
-                    <h2>Random Daw</h2>
-                    <p>Aplicação basica utilizando JavaScript, com o objetivo de dar um numero aleatorio ao definir
-                        valores no input.</p>
-                    <button><a href="https://taylorreis-lab.github.io/Random-Draw/" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/nikel.png" alt="img-project">
-                    <h2>Nikel</h2>
-                    <p>Site criado com objetivo de organizar suas finanças e pagamentos, focado no Html, Css3,
-                        JavaScript, Site robusto e com foco em simplicidade</p>
-                    <button type="button"><a href="https://taylorreis-lab.github.io/Nikel/index.html" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/empere-burguer.png" alt="img-project">
-                    <h2>Empere Code Burguer</h2>
-                    <p>Aplicação basica utilizando JavaScript, Html, CSS3, de fazer seçeção de categorias e preços dos
-                        humburgueres, e calcular valor total.</p>
-                    <button><a href="https://taylorreis-lab.github.io/Empere-CodeBurguer/" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-
-                <div class="card">
-                    <img src="./assets/For-pc.png" alt="img-project">
-                    <h2>Project We Care</h2>
-                    <p>Tela incial para site para Pet Shop, Utilizando somente Html e CSS</p>
-                    <button><a href="https://taylorreis-lab.github.io/Projeto-We-Care/" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-                <div class="card">
-                    <img src="./assets/project-we-coverage.png" alt="img-project">
-                    <h2>Project We Coverage</h2>
-                    <p>Tela incial para site, Utilizando somente html e css</p>
-                    <button><a href="https://taylorreis-lab.github.io/Projeto-We-Coverage/" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-                <div class="card">
-                    <img src="./assets/easy-shopping.png" alt="img-project">
-                    <h2>Project Easy Shopping</h2>
-                    <p>Tela incial para site de vendas de roupas online, Utilizando somente html e css</p>
-                    <button><a href="https://taylorreis-lab.github.io/Easy-Shopping/" target="_blank"
-                            style="text-decoration: none; color: #ffff;">Visitar o Project</a></button>
-                </div>
-                <button class="nextButton" id="nextButton">Próximo</button>
-            </div>
-        </div>
-        <div class="form-contato" id="contact">
-            <h1><span style="color: #52489c; margin-left: 45%; font-size: 40px;">Contact</h1>
-            <form action="https://formspree.io/f/mvoebjjy" method="post">
-                <label for="email">E-mail:</label><br>
-                <input type="email" id="email" name="email" required><br><br>
-
-                <label for="nome">Nome:</label><br>
-                <input type="text" id="nome" name="nome" required><br><br>
-
-                <label for="objetivo">Objetivo da Mensagem:</label><br>
-                <input type="text" id="objetivo" name="objetivo" required><br><br>
-
-                <label for="descricao">Descrição:</label><br>
-                <textarea id="descricao" name="descricao" rows="4" required></textarea><br><br>
-
-                <input type="submit" value="Enviar">
-            </form>
-        </div>
-        <footer class="footer">
-            <div class="copy">
-                <p>&copy; 2024 Taylor Reis. Todos os direitos reservados.</p>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/taylor__reis/" target="_blank" class="icon"><i
-                            class="bx bxl-instagram"></i></a>
-                    <a href="https://www.instagram.com/taylor__reis/" target="_blank" class="icon"><i
-                            class="bx bxl-linkedin"></i></a>
-                    <a href="https://github.com/TaylorReis-lab" target="_blank" class="icon"><i
-                            class="bx bxl-github"></i></a>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button id="btn-say-hello"
+                            class="bg-white text-primary px-10 py-5 rounded-2xl text-lg font-bold hover:shadow-xl hover:translate-y-[-2px] transition-all">
+                            <span data-i18n="cta.sayHello">Say Hello</span>
+                        </button>
+                        <button id="btn-view-github"
+                            class="bg-primary-dark/20 border border-white/30 backdrop-blur-sm text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-white/10 transition-all">
+                            <span data-i18n="cta.viewGithub">View Github</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </section>
-
-    <script src="./script.js"></script>
+        </section>
+    </main>
+    <footer class="py-12 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex flex-col gap-2">
+                <p class="text-sm font-bold">© 2025 Taylor Reis Portfolio.</p>
+                <p data-i18n="footer.built" class="text-xs text-gray-400">Built with Tailwind &amp; Passion.</p>
+            </div>
+            <div class="flex gap-8">
+                <a class="text-gray-500 hover:text-primary transition-colors font-medium" href="https://www.linkedin.com/in/taylorreis-dev/">LinkedIn</a>
+                <a class="text-gray-500 hover:text-primary transition-colors font-medium" href="https://github.com/TaylorReis-lab">GitHub</a>
+            </div>
+        </div>
+    </footer>
+    <script src="./script.js" defer></script>
 </body>
 
 </html>
