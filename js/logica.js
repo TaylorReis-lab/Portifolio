@@ -246,27 +246,26 @@
       if (!resp.ok) throw new Error(`GitHub API returned ${resp.status}`);
       const repos = await resp.json();
 
-      additionalProjects = repos.map((r) => {
-        const tags = inferTagsAndLegend(r);
-        const desc =
-          r.description ||
-          (r.homepage ? "Demo available" : "No description provided");
-        const img =
-          r.homepage ||
-          `https://opengraph.githubassets.com/1/${r.full_name}` ||
-          r.owner.avatar_url;
-        const legend =
-          `${r.language || ""}${r.pushed_at ? ` • Updated ${new Date(r.pushed_at).toLocaleDateString()}` : ""}`.trim();
-        return {
-          title: r.name,
-          desc,
-          img,
-          link: r.homepage || r.html_url,
-          repo: r.html_url,
-          tags,
-          legend,
-        };
-      });
+      additionalProjects = repos
+        .filter((r) => r.name !== "TaylorReis-lab")
+        .map((r) => {
+          const tags = inferTagsAndLegend(r);
+          const desc =
+            r.description ||
+            (r.homepage ? "Demo available" : "No description provided");
+          const img = `https://opengraph.githubassets.com/1/${r.full_name}`;
+          const legend =
+            `${r.language || ""}${r.pushed_at ? ` • Updated ${new Date(r.pushed_at).toLocaleDateString()}` : ""}`.trim();
+          return {
+            title: r.name,
+            desc,
+            img,
+            link: r.homepage || r.html_url,
+            repo: r.html_url,
+            tags,
+            legend,
+          };
+        });
 
       totalModalPages = Math.max(
         1,
@@ -354,7 +353,7 @@
   }
 
   // Load on startup (non-blocking) and start auto-refresh
-  fetchGithubProjects().then(() => startRepoAutoRefresh());
+  fetchGithubProjects();
 
   function renderModalPage(page) {
     currentModalPage = Math.max(0, Math.min(page, totalModalPages - 1));

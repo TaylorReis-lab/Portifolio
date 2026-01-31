@@ -28,18 +28,41 @@ Este documento descreve o que o script faz, como estender o comportamento básic
   - `#btn-see-all` — rola para `#projects`.
   - `#btn-chat` — rola para `#contact`.
 
-### Projetos (placeholders)
+### Cards de Projetos e Imagens
 
-- Os ícones de overlay nos cards abrem URLs de exemplo:
-  - `link` → abre `https://example.com` (substituir por link do projeto)
-  - `code` → abre `https://github.com` (substituir por repositório do projeto)
+Cada card de projeto utiliza uma imagem local da pasta `assets/`, com o nome do arquivo correspondente ao projeto. Isso facilita a manutenção e a troca de imagens.
 
-**Boas práticas:** adicione atributos nos cartões de projeto para URLs reais:
+- O atributo `src` do elemento `<img>` de cada card aponta para o arquivo correto em `assets/`.
+- Exemplo: `<img src="./assets/easy-shopping.png" ... />`.
+- Para adicionar ou trocar uma imagem, basta substituir o arquivo na pasta ou alterar o nome no atributo `src`.
 
-- `data-link="https://meuprojeto.com"`
-- `data-repo="https://github.com/meu/repo"`
+### Funções JS para projetos
 
-O script irá checar esses atributos antes de abrir algo (caso queira implementar essa lógica).
+- **renderTagsInto(container, tags):**
+  - Renderiza as tags de tecnologia no container do card, usando estilos automáticos.
+  - Recebe o container e um array de tags, aplica classes de cor e formatação.
+
+- **ensureProjectCardTags(card):**
+  - Garante que cada card de projeto exiba suas tags corretamente.
+  - Lê o atributo `data-tags` do card e chama `renderTagsInto`.
+
+- **updateFeaturedProjects():**
+  - Atualiza os cards principais da página com dados dinâmicos (imagem, título, descrição, links, tags) vindos do GitHub ou de um array local.
+  - Substitui a imagem do card pelo valor correto, atualiza título, descrição, links e tags.
+
+- **fetchGithubProjects():**
+  - Busca projetos do GitHub do usuário configurado e monta um array de projetos para exibição dinâmica.
+  - Cada projeto pode conter: título, descrição, imagem, link, repositório, tags, legenda.
+
+- **renderModalPage(page):**
+  - Renderiza a página do modal de projetos, exibindo os cards paginados.
+  - Atualiza imagens, títulos, descrições, links e tags de cada card do modal.
+
+**Boas práticas:**
+
+- Nomeie os arquivos de imagem de forma descritiva e mantenha a lista atualizada na documentação.
+- Para adicionar novos projetos, inclua o nome do arquivo de imagem em `assets/` e atualize o card correspondente.
+- Use os atributos `data-link`, `data-repo` e `data-tags` para facilitar a manutenção e automação dos cards.
 
 ### Acessibilidade e atalhos
 
