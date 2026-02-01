@@ -260,7 +260,8 @@
       const repos = await resp.json();
 
       additionalProjects = repos
-        .filter((r) => r.name !== "TaylorReis-lab")
+        .filter((r) => r.name !== "TaylorReis-lab")// Exclude main profile repo
+        .filter((r) => r.name !== "Portifolio" && !r.private)
         .map((r) => {
           const tags = inferTagsAndLegend(r);
           const desc =
