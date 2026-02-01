@@ -132,6 +132,19 @@
     }
   }
 
+  // Function for downloading cv PDF
+  const btnDownloadCV = document.getElementById("btn-cv");
+  console.log("btnDownloadCV:", btnDownloadCV);
+  if (btnDownloadCV) {
+    btnDownloadCV.addEventListener("click", (e) => {
+      e.preventDefault();
+      // URL do arquivo PDF do currículo
+      const cvUrl =
+        "https://drive.google.com/file/d/1RuDiSgnwkXgnTmIiBT8Rrm0oUW0HSTpt/view?usp=drive_link";
+      openExternal(cvUrl);
+    });
+  }
+
   // Ensure each project card has a standard .project-tags rendered from data-tags
   function ensureProjectCardTags(card) {
     if (!card) return;
