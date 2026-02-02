@@ -126,21 +126,28 @@
     // Custom: force max 2 tags per row by setting a max-width if needed
     // (Assumes each tag is ~80px wide, adjust as needed)
     if (tags.length > 2) {
-      container.style.maxWidth = `${2 * 80}px`;
+      container.style.maxWidth = `${2 * 100}px`;
     } else {
       container.style.maxWidth = "unset";
     }
   }
 
-  // Function for downloading cv PDF
+  // Function for downloading CV PDF
   const btnDownloadCV = document.getElementById("btn-cv");
-  console.log("btnDownloadCV:", btnDownloadCV);
   if (btnDownloadCV) {
     btnDownloadCV.addEventListener("click", (e) => {
       e.preventDefault();
-      // URL do arquivo PDF do currículo
-      const cvUrl =
-        "https://drive.google.com/file/d/1RuDiSgnwkXgnTmIiBT8Rrm0oUW0HSTpt/view?usp=drive_link";
+
+      // Get current language
+      const currentLang = localStorage.getItem("lang") || "en";
+
+      // CV links by language
+      const CV_LINKS = {
+        pt: "https://drive.google.com/file/d/1RuDiSgnwkXgnTmIiBT8Rrm0oUW0HSTpt/view?usp=drive_link",
+        en: "https://drive.google.com/file/d/12bQymb56Skofn8y1EKqOSTzh4dF7e-xN/view?usp=sharing",
+      };
+
+      const cvUrl = CV_LINKS[currentLang] || CV_LINKS.en;
       openExternal(cvUrl);
     });
   }
@@ -260,7 +267,7 @@
       const repos = await resp.json();
 
       additionalProjects = repos
-        .filter((r) => r.name !== "TaylorReis-lab")// Exclude main profile repo
+        .filter((r) => r.name !== "TaylorReis-lab") // Exclude main profile repo
         .filter((r) => r.name !== "Portifolio" && !r.private)
         .map((r) => {
           const tags = inferTagsAndLegend(r);
