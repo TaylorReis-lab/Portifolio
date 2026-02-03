@@ -381,7 +381,7 @@
                         </div>
                     </div>
                     <div class="p-8 flex flex-col gap-4">
-                        <div class="flex gap-2">
+                        <div class="flex gap-2" style="max-width: 100px;">
                             <span
                                 class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">Node.js</span>
                             <span
@@ -400,7 +400,7 @@
         <!-- All Projects Modal (paginado) -->
         <div id="projects-modal" class="fixed inset-0 z-[9999] hidden flex items-center justify-center p-6">
             <div id="projects-modal-overlay" class="absolute inset-0 bg-black/40 z-10"></div>
-            <div class="relative z-20 w-full max-w-[1100px] modal-content bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-300 opacity-0 translate-y-6 max-h-[calc(100vh-6rem)] overflow-auto"
+            <div class="relative z-20 w-full max-w-[1300px] modal-content bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-300 opacity-0 translate-y-6 max-h-[calc(100vh-6rem)] overflow-auto"
                 role="dialog" aria-modal="true" aria-labelledby="projects-modal-title" aria-hidden="true">
                 <div class="p-0.5 flex items-center justify-between border-b border-gray-100 dark:border-gray-700">
                     <h3 id="projects-modal-title" class="text-xl font-bold" data-i18n="projects.modalTitle">All Projects
@@ -416,7 +416,7 @@
                                 class="material-symbols-outlined">close</span></button>
                     </div>
                 </div>
-                <div class="p-8">
+                <div class="p-8" style="max-height: 80vh; overflow-y: auto;">
                     <div id="projects-modal-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
                     <div class="mt-6 flex items-center justify-center gap-3">
                         <button id="projects-modal-page-prev"
